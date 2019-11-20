@@ -1,12 +1,11 @@
-# *[Poner aquí el Título del Proyecto]*
+# *Quejatec cloud system*
 ---
-#### Materia: *[Poner aquí nombre de la materia]*
+#### Materia: *Desarrollo de aplicaciones en la nube TC3059*
 
-##### Campus: *[Poner aquí su campus]*
+##### Campus: *Santa Fé*
 
 ##### Integrantes:
-1. *[Poner aquí Nombre y Apellidos del integrante 1]*
-2. *[Poner aquí Nombre y Apellidos del integrante 2]*
+1. *Enrique Alejandro Mondragón Tayabas*
 
 ---
 ## 1. Aspectos generales
