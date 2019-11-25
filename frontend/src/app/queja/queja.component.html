@@ -1,0 +1,41 @@
+<mat-card>
+    <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+    <h2>Nueva Queja</h2>
+    <form #postForm="ngForm" autocomplete="off">
+        <!-- <div class="menu"> -->
+            <p>Ubicacion</p>
+          <mat-form-field>
+            <mat-select [formControl]="pokemonControl">
+              <mat-optgroup *ngFor="let place of places" [label]="place.name"
+                            [disabled]="place.disabled">
+                <mat-option *ngFor="let placeEvent of place.placeEvents" [value]="placeEvent._id">
+                  {{placeEvent.name}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+              <textarea
+                [formControl]="descControl"
+                matInput
+                rows="2"
+                name="description"
+
+                required
+                placeholder="Descripcion"
+
+                >
+              </textarea>
+          </mat-form-field>
+
+
+
+          <button
+            mat-raised-button
+            color = "primary"
+
+            type="submit" (click)="postQueja()">Enviar Queja
+          </button>
+    </form>
+  </mat-card>

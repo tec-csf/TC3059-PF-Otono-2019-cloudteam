@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <h1>Quejatec</h1>
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="userIsAuthenticated"> -->
+      <span class="spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item routerLink="/misquejas" *ngIf="isAuth">
+          <mat-icon>list</mat-icon>
+          <span>Mis Quejas</span>
+        </button>
+        <button mat-menu-item routerLink="/queja" *ngIf="isAuth">
+          <mat-icon>note_add</mat-icon>
+          <span>Nueva Queja</span>
+        </button>
+        <button mat-menu-item *ngIf="isAuth">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+</mat-toolbar>
+
+
+
