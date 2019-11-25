@@ -58,20 +58,25 @@ placeEventController.get = (req, res) => {
 */
 placeEventController.getAll = (req, res) => {
 
-    var placeEventType = req.params.type;
-    var page = parseInt(req.params.page, 10);
-    var itemsPerPage = parseInt(req.params.limit, 10);
-  
-    PlaceEvent.find({$or: [{status: 'active', type: placeEventType}, {status: 'draft', type: placeEventType}]}).sort('name').limit(itemsPerPage).skip(page * itemsPerPage).exec(function(err, placeEvents){
+    // var placeEventType = req.params.type;
+    var page = req.query.page ? parseInt(req.query.page, 10) - 1 : 0;
+    var itemsPerPage = req.query.limit ? parseInt(req.query.limit, 10) : 5 ;
+    const filterField = req.query.field;
+    var query = {};
+    if (filterField) {
+      query[filterField] = req.query.filter;
+    }
+
+    PlaceEvent.find(query).sort('name').limit(itemsPerPage).skip(page * itemsPerPage).exec(function(err, placeEvents){
       if (err) {
         res.status(500).send({message: err});
       } else {
         if (placeEvents) {
-            PlaceEvent.count({$or: [{status: 'active', type: placeEventType}, {status: 'draft', type: placeEventType}]}, function(err, count) {
+            PlaceEvent.count(query, function(err, count) {
              if (err) {
                res.status(500).send({message: 'ERROR EN LA PETICION'});
              } else {
-               return res.status(500).send({
+               return res.status(200).send({
                  total: count,
                  placeEvents
                });

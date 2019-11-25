@@ -59,17 +59,21 @@ issueController.getAll = (req, res) => {
     var issueStatus = req.params.status;
     var page = parseInt(req.params.page, 10);
     var itemsPerPage = parseInt(req.params.limit, 10);
-  
-    Issue.find({status: issueStatus}).sort('name').limit(itemsPerPage).skip(page * itemsPerPage).exec(function(err, issues){
+    const filterField = req.query.field;
+    var query = {};
+    if (filterField) {
+      query[filterField] = req.query.filter;
+    }
+    Issue.find(query).sort('name').limit(itemsPerPage).skip(page * itemsPerPage).exec(function(err, issues){
       if (err) {
         res.status(500).send({message: err});
       } else {
         if (issues) {
-            Issue.count( {status: issueStatus} , function(err, count) {
+            Issue.count( query , function(err, count) {
              if (err) {
                res.status(500).send({message: 'ERROR EN LA PETICION'});
              } else {
-               return res.status(500).send({
+               return res.status(200).send({
                  total: count,
                  issues
                });

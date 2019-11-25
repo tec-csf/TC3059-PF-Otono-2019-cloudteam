@@ -23,7 +23,7 @@ clientPlaceEventGroupController.getAll = (req, res) => {
                           res.status(500).send({message: err});
                         } else {
                           if (placeEventGroups) {
-                            return res.status(500).send({
+                            return res.status(200).send({
                                 placeEventGroups
                             });
                           } else {

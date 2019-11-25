@@ -1,77 +1,77 @@
 export const DUMMY_DATA = [
   {
-    name: 'Tablets',
+    name: '501',
     series: [
           {
-      name: 'USA',
-      value: 50
+      name: '24/11/2019',
+      value: -50
     },
       {
         value: 80,
-        name: 'United Kingdom'
+        name: '23/11/2019'
       },
       {
         value: 85,
-        name: 'France'
+        name: '22/11/2019'
       },
       {
         value: 90,
-        name: 'Japan'
+        name: '21/11/2019'
       },
       {
         value: 100,
-        name: 'China'
+        name: '20/11/2019'
       }
     ]
   },
     {
-    name: 'Cell Phones',
+    name: '405',
     series: [
           {
       value: 10,
-      name: 'USA'
+      name: '24/11/2019'
     },
       {
         value: 20,
-        name: 'United Kingdom'
+        name: '23/11/2019'
       },
       {
         value: 30,
-        name: 'France'
+        name: '22/11/2019'
       },
       {
         value: 40,
-        name: 'Japan'
+        name: '21/11/2019'
       },
       {
         value: 10,
-        name: 'China'
+        name: '20/11/2019'
       }
     ]
   },
     {
-    name: 'Computers',
+    name: '602',
     series: [
           {
       value: 2,
-      name: 'USA',
+      name: '24/11/2019',
 
     },
       {
         value: 4,
-        name: 'United Kingdom'
+        name: '23/11/2019'
       },
       {
         value: 20,
-        name: 'France'
+        name: '22/11/2019'
       },
       {
         value: 30,
-        name: 'Japan'
+        name: '21/11/2019'
       },
       {
         value: 35,
-        name: 'China'
+        name: '20/11/2019'
       }
     ]
   }

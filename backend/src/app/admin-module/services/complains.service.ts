@@ -30,10 +30,10 @@ export class ComplainsService {
 
   getComplains = (options: RequestTableOptions) => {
     console.log('getComplains');
-    return this.httpClient.get(`${apiUrl}admin/complains`, { params: getTableHttpParams(options) }).pipe(
+    return this.httpClient.get(`${apiUrl}admin/issue`, { params: getTableHttpParams(options) }).pipe(
       map((response: any) => {
         console.log('getComplains response', response);
-        return { items: response.items.docs, totalCount: response.items.totalDocs } as ResponseTableItems;
+        return { items: response.issues, totalCount: response.total } as ResponseTableItems;
       }),
       catchError(this.handleError('getComplains', null))
     );
@@ -41,7 +41,7 @@ export class ComplainsService {
 
   createComplain = (complainData: any) => {
     console.log('createComplain', complainData);
-    return this.httpClient.post(`${apiUrl}admin/complain`, complainData).pipe(
+    return this.httpClient.post(`${apiUrl}admin/issue`, complainData).pipe(
       map((response: any) => {
         console.log('createComplain response', response);
         return response.item;
@@ -52,7 +52,7 @@ export class ComplainsService {
 
   getComplain = (complainId: string) => {
     console.log('getComplain', complainId);
-    return this.httpClient.get(`${apiUrl}admin/complain/${complainId}`).pipe(
+    return this.httpClient.get(`${apiUrl}admin/issue/${complainId}`).pipe(
       map((response: any) => {
         console.log('getComplain response', response);
         return response.item;
@@ -63,7 +63,7 @@ export class ComplainsService {
 
   updateComplain = (complainId: string, complainData: any) => {
     console.log('updateComplain', complainData);
-    return this.httpClient.patch(`${apiUrl}admin/complain/${complainId}`, complainData).pipe(
+    return this.httpClient.patch(`${apiUrl}admin/issue/${complainId}`, complainData).pipe(
       map((response: any) => {
         console.log('updateComplain response', response);
         return response.item;
@@ -74,7 +74,7 @@ export class ComplainsService {
 
   deleteComplain = (complainId: string) => {
     console.log('deleteComplain', complainId);
-    return this.httpClient.delete(`${apiUrl}admin/complain/${complainId}`).pipe(
+    return this.httpClient.delete(`${apiUrl}admin/issue/${complainId}`).pipe(
       map((response: any) => {
         console.log('deleteComplain response', response);
         return response.success;

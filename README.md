@@ -49,12 +49,12 @@ Como parte de la entrega final del proyecto, se debe incluir la siguiente inform
 * Explicación del flujo de información en la arquitectura.
 * Descripción de las fuentes de información utilizadas (archivos CSV, JSON, TXT, bases de datos, entre otras).
 * Guía de configuración, instalación y despliegue de la solución en la plataforma en la nube seleccionada.
-* Documentación de la API. Puede ver un ejemplo en [Swagger](https://swagger.io/). 
+* Documentación de la API. Puede ver un ejemplo en [Swagger](https://swagger.io/).
 * El código debe estar documentado siguiendo los estándares definidos para el lenguaje de programación seleccionado.
 
 ## 2. Descripción del proyecto
 
-En el ITESM Campus Santa Fé como en diferentes organizaciones e insitutciones en el mundo, los estudiantes, profesores, empleados y usuarios, se encuentran con la problemática de no contar con un sistema accesible para poder reportar cualquier falla en el servicio inmoviliario. Se han tratado de implentar algúnos de los sistemas actuales de reporte, pero estos no son tan accesibles y en la mayoría de la veces no cuentan con un mecanismo de dar seguimiento a cualquier reporte por parte del usuario para de esta forma garantizar que el problema sea resuelto.
+En el ITESM Campus Santa Fé como en diferentes organizaciones e instituciones en el mundo, los estudiantes, profesores, empleados y usuarios, se encuentran con la problemática de no contar con un sistema accesible para poder reportar cualquier falla en el servicio inmobiliario. Se han tratado de implementar algúnos de los sistemas actuales de reporte, pero estos no son tan accesibles y en la mayoría de la veces no cuentan con un mecanismo de dar seguimiento a cualquier reporte por parte del usuario para de esta forma garantizar que el problema sea resuelto.
 
 ## 3. Solución
 
@@ -66,9 +66,9 @@ A continuación aparecen descritos los diferentes elementos que forman parte de 
 
 Tenemos dos principales flujos que alimentan de información la plataforma.
 
-La primera es a través de los usuarios, los cuales acceden a través del Cloud DNS descargando desde un servicio estático "Storage" una "Single Page Aplication" para que esta sea quien que enviarán sus calificaciones y sus quejas a al servidor y este a la base de dato "dentor de GKE" así como el inicio de sesión que se hace utilizando el servicio de "Cloud Enpoints".
+La primera es a través de los usuarios, los cuales acceden a través del Cloud DNS descargando desde un servicio estático "Storage" una "Single Page Aplication" para que esta sea quien que enviarán sus calificaciones y sus quejas a al servidor y este a la base de datos "dentro de GKE" así como el inicio de sesión que se hace utilizando el servicio de "Cloud Enpoints".
 
-El segundo es para los dispositivos de IoT los cuáles se administrar utilizando el servicio IoT core y este dirige los datos transmitidos a un tópico de "Pub/Sub" el cuál administra una cola de eventos para que el subscriptor, en este caso "Data flow", se encargue de procesar la ifnromación resibida y almacenarla en BigQuery, y posteriormente a Data studio para visualizar la información.
+El segundo es para los dispositivos de IoT los cuáles se administrar utilizando el servicio IoT core y este dirige los datos transmitidos a un tópico de "Pub/Sub" el cuál administra una cola de eventos para que el subscriptor, en este caso "Data flow", se encargue de procesar la información recibida y almacenarla en BigQuery, y posteriormente a Data studio para visualizar la información.
 
 ### 3.2 Descripción de los componentes
 
@@ -79,16 +79,16 @@ El segundo es para los dispositivos de IoT los cuáles se administrar utilizando
 * Endpoints: Servirá para identificar y autentificar a los usuarios utilizando id de google.
 * IoT Core: Administra los dispositivos de IoT que se quieran conectar a la plataforma.
 * Cloud Pub/Sub: Se encargá del manejo de eventos para los datos entre los dispositivos IoT y GCP.
-* Dataflow: Este servicio tranforma los datos recibidos por los dispositivos de IoT en un formato y lo inserta a una tabla en BigQuery.
+* Dataflow: Este servicio transforma los datos recibidos por los dispositivos de IoT en un formato y lo inserta a una tabla en BigQuery.
 * BigQuery: Albergará los datos recibidos por el dataflow de los dispositivos IoT.
 
 ### 3.3 Frontend
 
-Para el frontend se buscó realizar una aplicación web amigable al usuario la cuál pueda ser cargada de forma rápida y que no dependiera de un servidor con acceso a los rescursos de la solución, una aplicación que corriera 100% en el cliente y realizara consultas a un API.
+Para el frontend se buscó realizar una aplicación web amigable al usuario la cuál pueda ser cargada de forma rápida y que no dependiera de un servidor con acceso a los recursos de la solución, una aplicación que corriera 100% en el cliente y realizara consultas a un API.
 
 #### 3.3.1 Lenguaje de programación
 
-Se utiliza comolenguage de programación [Typescript](https://www.typescriptlang.org) el cuál es un subset de javascript.
+Se utiliza como lenguaje de programación [Typescript](https://www.typescriptlang.org) el cuál es un subset de javascript.
 
 #### 3.3.2 Framework
 
@@ -96,7 +96,7 @@ Dada la experiencia del equipo de desarrollo y la basta documentación sobre est
 
 #### 3.3.3 Librerías de funciones o dependencias
 
-Se utilizó una librería principal llamada "[material](https://material.angular.io)" lacuál nos proporsiona elementos de UI y componentes de angular listos para usar.
+Se utilizó una librería principal llamada "[material](https://material.angular.io)" la cuál nos proporciona elementos de UI y componentes de angular listos para usar.
 
 ### 3.4 Backend
 
@@ -104,7 +104,7 @@ Para el backend igualmente se realizó una aplicación que corre 100% del lado d
 
 #### 3.4.1 Lenguaje de programación
 
-Se utiliza comolenguage de programación [Typescript](https://www.typescriptlang.org).
+Se utiliza como lenguaje de programación [Typescript](https://www.typescriptlang.org).
 
 #### 3.4.2 Framework
 
@@ -116,7 +116,7 @@ Aquí se utilizaron recursos que previamente se tenían realizados localmente. F
 
 Se utiliza la librería [@swimlane/ngx-charts](https://www.npmjs.com/package/@swimlane/ngx-graph) la cuál nos da una interfáz para graficar datos de forma amigable al usuario.
 
-Igualmente se utilizó una librería principal llamada "[material](https://material.angular.io)" lacuál nos proporsiona elementos de UI y componentes de angular listos para usar.
+Igualmente se utilizó una librería principal llamada "[material](https://material.angular.io)" la cuál nos proporciona elementos de UI y componentes de angular listos para usar.
 
 ### 3.5 API
 
@@ -124,7 +124,7 @@ El servidor de punto de acceso se realizó pensando en utilizar un lenguaje que 
 
 #### 3.5.1 Lenguaje de programación
 
-Javascript es el lenguage que se eligió y este sobre el "runtime" [nodejs](https://nodejs.org/en/).
+Javascript es el lenguaje que se eligió y este sobre el "runtime" [nodejs](https://nodejs.org/en/).
 
 #### 3.5.2 Framework
 
@@ -132,14 +132,10 @@ Para realizar las rutas de manera fácil se utilizó [ExpressJS](https://express
 
 #### 3.5.3 Librerías de funciones o dependencias
 
-[Dotenv](https://www.npmjs.com/package/dotenv): se utiliza para ller un archivo de variables de ambiente.
-[Bcrypt](https://www.npmjs.com/package/bcrypt): esta libreria hashea los passwords de los usuarios.
+[Dotenv](https://www.npmjs.com/package/dotenv): se utiliza para leer un archivo de variables de ambiente.
+[Bcrypt](https://www.npmjs.com/package/bcrypt): esta librería hashea las contraseñas de los usuarios.
 [mongoose](https://mongoosejs.com): cliente para conectarse a un servidor de mongodb y abstrae a objetos los modelos.
-[mongoose-pagination](https://www.npmjs.com/package/mongoose-pagination): libreria que extiende mongoose para realizar paginación en collecciones.
-
-*[Incluya aquí una explicación de cada uno de los endpoints que forman parte de la API. Cada endpoint debe estar correctamente documentado.]*
-
-*[Por cada endpoint debe incluir lo siguiente:]*
+[mongoose-pagination](https://www.npmjs.com/package/mongoose-pagination): librería que extiende mongoose para realizar paginación en colecciones.
 
 * **Descripción**:
 * **URL**:
