@@ -1,0 +1,14 @@
+imports:
+  - path: templates/gcs_bucket/gcs_bucket.py
+    name: gcs_bucket.py
+
+resources:
+  - name: user.iworkcloud.xyz
+    type: gcs_bucket.py
+    properties:
+      name: user.iworkcloud.xyz
+      location: us-central1
+      versioning:
+        enabled: True
+      labels:
+        env: production

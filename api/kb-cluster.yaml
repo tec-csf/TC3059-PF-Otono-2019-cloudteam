@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kube-api
+  template:
+    metadata:
+      labels:
+        app: kube-api
+    spec:
+      containers:
+      - name: kube-api
+        image: gcr.io/proyectointegrador-253221/kube-api:latest
+        ports:
+        - containerPort: 8080

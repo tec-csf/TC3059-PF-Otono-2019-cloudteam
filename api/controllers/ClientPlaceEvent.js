@@ -8,7 +8,7 @@ var clientPlaceEventGroupController = {};
 /*
 */
 clientPlaceEventGroupController.getAll = (req, res) => {
-
+  console.log('clientPlaceEventGroupController');
     var page = parseInt(req.params.page, 10);
     var itemsPerPage = parseInt(req.params.limit, 10);
   

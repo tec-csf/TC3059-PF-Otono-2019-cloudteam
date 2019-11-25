@@ -148,14 +148,42 @@ Para realizar las rutas de manera fácil se utilizó [ExpressJS](https://express
 * **Formato JSON del cuerpo de la solicitud**: 
 * **Formato JSON de la respuesta**:
 
+[API documentation -> ./docs/api-def.md](./docs/api-def.md)
 
 ## 3.6 Pasos a seguir para utilizar el proyecto
 
-*[Incluya aquí una guía paso a paso para poder utilizar el proyecto, desde la clonación de este repositorio hasta el despliegue de la solución en una plataforma en la nube.]*
+### 3.6.1 API
+
+```bash
+$ gcloud config set project
+$ cd api/
+$ docker build -t gcr.io/<project-id>/kube-api:latest .
+$ gcloud docker -- push gcr.io/proyectointegrador-253221/kube-ap
+$ gcloud deployment-manager deployments create kube-api --config ./kb-cluster.yaml
+```
+
+### 3.6.1 Cloud DNS
+
+* Darpermisos de utilizar el dominio
+* Crear la zona del dominio
+
+### 3.6.1 Frontend
+
+```bash
+$ cd frontend/
+$ gcloud deployment-manager deployments create frontend-bucket --config ./storagebucket.yaml
+
+```
+
+### 3.6.1 Backend
+
+```bash
+$ cd backend/
+$ gcloud deployment-manager deployments create backend-bucket --config ./storagebucket.yaml
+
+```
 
 ## 4. Referencias
-
-*[Incluya aquí las referencias a sitios de interés, datasets y cualquier otra información que haya utilizado para realizar el proyecto y que le puedan ser de utilidad a otras personas que quieran usarlo como referencia]*
 
 Autenticación de usuarios con Node.js  |  Node.js  |  Google Cloud. (0AD). Retrieved from https://cloud.google.com/nodejs/getting-started/authenticate-users?hl=es-419
 Automated Static Website Publishing with Cloud Build  |  Google Cloud Platform Community  |  Google Cloud. (0AD). Retrieved from https://cloud.google.com/community/tutorials/automated-publishing-cloud-build
