@@ -54,7 +54,7 @@ Como parte de la entrega final del proyecto, se debe incluir la siguiente inform
 
 ## 2. Descripción del proyecto
 
-*[Incluya aquí la descripción del proyecto.]*
+En el ITESM Campus Santa Fé como en diferentes organizaciones e insitutciones en el mundo, los estudiantes, profesores, empleados y usuarios, se encuentran con la problemática de no contar con un sistema accesible para poder reportar cualquier falla en el servicio inmoviliario. Se han tratado de implentar algúnos de los sistemas actuales de reporte, pero estos no son tan accesibles y en la mayoría de la veces no cuentan con un mecanismo de dar seguimiento a cualquier reporte por parte del usuario para de esta forma garantizar que el problema sea resuelto.
 
 ## 3. Solución
 
@@ -62,37 +62,80 @@ A continuación aparecen descritos los diferentes elementos que forman parte de 
 
 ### 3.1 Arquitectura de la solución
 
-*[Incluya aquí un diagrama donde se aprecie la arquitectura de la solución propuesta, así como la interacción entre los diferentes componentes de la misma.]*
+![Arquitectura](./docs/architecture-diagram.png)
 
-*[Incluya una explicación del flujo de la información entre los diferentes componentes.]*
+Tenemos dos principales flujos que alimentan de información la plataforma.
+
+La primera es a través de los usuarios, los cuales acceden a través del Cloud DNS descargando desde un servicio estático "Storage" una "Single Page Aplication" para que esta sea quien que enviarán sus calificaciones y sus quejas a al servidor y este a la base de dato "dentor de GKE" así como el inicio de sesión que se hace utilizando el servicio de "Cloud Enpoints".
+
+El segundo es para los dispositivos de IoT los cuáles se administrar utilizando el servicio IoT core y este dirige los datos transmitidos a un tópico de "Pub/Sub" el cuál administra una cola de eventos para que el subscriptor, en este caso "Data flow", se encargue de procesar la ifnromación resibida y almacenarla en BigQuery, y posteriormente a Data studio para visualizar la información.
 
 ### 3.2 Descripción de los componentes
 
-*[Incluya aquí una descripción detallada de cada uno de los componentes de la arquitectura así como una justificación de la selección de cada componente]*
+* VPC Networks: Se requerirá de una red donde se manejan los servicios de backend, frontend y api.
+* Kubernetes Engine: Se utilizará para dar el servicio de api a la aplicación, permitiendo alta disponibilidad.
+* Storage: Se utilizará para servir los archivos estáticos de las aplicaciones de frontend y backend.
+* Cloud DNS: Maneja el dominio adquirido el cuál permite utilizar en storage un "bucket" como servicio de páginas web estáticas.
+* Endpoints: Servirá para identificar y autentificar a los usuarios utilizando id de google.
+* IoT Core: Administra los dispositivos de IoT que se quieran conectar a la plataforma.
+* Cloud Pub/Sub: Se encargá del manejo de eventos para los datos entre los dispositivos IoT y GCP.
+* Dataflow: Este servicio tranforma los datos recibidos por los dispositivos de IoT en un formato y lo inserta a una tabla en BigQuery.
+* BigQuery: Albergará los datos recibidos por el dataflow de los dispositivos IoT.
 
 ### 3.3 Frontend
 
-*[Incluya aquí una explicación de la solución utilizada para el frontend del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+Para el frontend se buscó realizar una aplicación web amigable al usuario la cuál pueda ser cargada de forma rápida y que no dependiera de un servidor con acceso a los rescursos de la solución, una aplicación que corriera 100% en el cliente y realizara consultas a un API.
 
 #### 3.3.1 Lenguaje de programación
+
+Se utiliza comolenguage de programación [Typescript](https://www.typescriptlang.org) el cuál es un subset de javascript.
+
 #### 3.3.2 Framework
+
+Dada la experiencia del equipo de desarrollo y la basta documentación sobre este framework se decidió utilizar [Angular](https://angular.io).
+
 #### 3.3.3 Librerías de funciones o dependencias
+
+Se utilizó una librería principal llamada "[material](https://material.angular.io)" lacuál nos proporsiona elementos de UI y componentes de angular listos para usar.
 
 ### 3.4 Backend
 
-*[Incluya aquí una explicación de la solución utilizada para el backend del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+Para el backend igualmente se realizó una aplicación que corre 100% del lado del cliente y está realizada de forma estandarizada para poder crecer a futuro.
 
 #### 3.4.1 Lenguaje de programación
+
+Se utiliza comolenguage de programación [Typescript](https://www.typescriptlang.org).
+
 #### 3.4.2 Framework
+
+Se utiliza [Angular](https://angular.io) en la versión 8.
+
 #### 3.4.3 Librerías de funciones o dependencias
+
+Aquí se utilizaron recursos que previamente se tenían realizados localmente. Forms componente y Table component
+
+Se utiliza la librería [@swimlane/ngx-charts](https://www.npmjs.com/package/@swimlane/ngx-graph) la cuál nos da una interfáz para graficar datos de forma amigable al usuario.
+
+Igualmente se utilizó una librería principal llamada "[material](https://material.angular.io)" lacuál nos proporsiona elementos de UI y componentes de angular listos para usar.
 
 ### 3.5 API
 
-*[Incluya aquí una explicación de la solución utilizada para implementar la API del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+El servidor de punto de acceso se realizó pensando en utilizar un lenguaje que permitiera a los desarrolladores trabajar en frontend y backend al mismo tiempo sin muchas complicaciones.
 
 #### 3.5.1 Lenguaje de programación
+
+Javascript es el lenguage que se eligió y este sobre el "runtime" [nodejs](https://nodejs.org/en/).
+
 #### 3.5.2 Framework
+
+Para realizar las rutas de manera fácil se utilizó [ExpressJS](https://expressjs.com).
+
 #### 3.5.3 Librerías de funciones o dependencias
+
+[Dotenv](https://www.npmjs.com/package/dotenv): se utiliza para ller un archivo de variables de ambiente.
+[Bcrypt](https://www.npmjs.com/package/bcrypt): esta libreria hashea los passwords de los usuarios.
+[mongoose](https://mongoosejs.com): cliente para conectarse a un servidor de mongodb y abstrae a objetos los modelos.
+[mongoose-pagination](https://www.npmjs.com/package/mongoose-pagination): libreria que extiende mongoose para realizar paginación en collecciones.
 
 *[Incluya aquí una explicación de cada uno de los endpoints que forman parte de la API. Cada endpoint debe estar correctamente documentado.]*
 
@@ -113,3 +156,21 @@ A continuación aparecen descritos los diferentes elementos que forman parte de 
 ## 4. Referencias
 
 *[Incluya aquí las referencias a sitios de interés, datasets y cualquier otra información que haya utilizado para realizar el proyecto y que le puedan ser de utilidad a otras personas que quieran usarlo como referencia]*
+
+Autenticación de usuarios con Node.js  |  Node.js  |  Google Cloud. (0AD). Retrieved from https://cloud.google.com/nodejs/getting-started/authenticate-users?hl=es-419
+Automated Static Website Publishing with Cloud Build  |  Google Cloud Platform Community  |  Google Cloud. (0AD). Retrieved from https://cloud.google.com/community/tutorials/automated-publishing-cloud-build
+
+AVR-IoT on Google Cloud. (0AD). Retrieved from https://codelabs.developers.google.com/codelabs/avr-cloud-iot/#0
+
+Building a Node.js App on App Engine  |  App Engine standard environment for Node.js docs  |  Google Cloud. (0AD). Retrieved from https://cloud.google.com/appengine/docs/standard/nodejs/building-app/hhsadiqhhsadiq 1. (1966, October 1). 
+
+Deploying angular2 web app on google cloud buckets. Retrieved from https://stackoverflow.com/questions/38053113/deploying-angular2-web-app-on-google-cloud-buckets
+
+Identity and authentication, the Google Cloud way | Google Cloud Blog. (0AD). Retrieved from https://cloud.google.com/blog/products/identity-security/identity-and-authentication-the-google-cloud-wayMicrochipTech. (0AD).
+
+MicrochipTech/gcp-iot-core-examples. Retrieved from https://github.com/MicrochipTech/gcp-iot-core-examples/wiki/Getting-Started
+
+Serving an Angular App's Static Files from Google Cloud Storage (Part 15). (2019, January 22). Retrieved from https://dragonprogrammer.com/serve-angular-files-cloud-storage/
+
+
+https://www.medallia.com/net-promoter-score/

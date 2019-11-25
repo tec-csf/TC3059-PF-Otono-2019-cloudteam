@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { HomeComponent } from './views/home/home.component';
 import { ComplainViewComponent } from './views/complain-view/complain-view.component';
 import { ComplainsComponent } from './views/complains/complains.component';
@@ -15,6 +17,17 @@ import { AdminComponent } from './admin/admin.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
+import {
+  MatSidenavModule, MatListModule, MatIconModule, MatToolbarModule,
+  MatButtonModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+} from '@angular/material';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { FormModule } from '../app-modules/form-module';
+import { TableModule } from '../app-modules/table-module';
+import { AppServicesModule } from '../app-modules/app-services-module';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -25,7 +38,14 @@ import { AdminRoutingModule } from './admin-routing.module';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    ReactiveFormsModule,
+    AdminRoutingModule,
+    MatSidenavModule, MatListModule, MatIconModule, MatToolbarModule,
+    MatButtonModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+    FormModule,
+    TableModule,
+    AppServicesModule,
+    NgxChartsModule,
   ]
 })
 export class AdminModule { }
